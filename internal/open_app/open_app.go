@@ -4,7 +4,7 @@ import (
 	"os/exec"
 )
 
-func OpenApp(path string) error {
+func Open(path string) error {
 	var cmd string = "open"
 	var args []string = []string{"-n", path}
 

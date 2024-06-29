@@ -1,7 +1,7 @@
 package main
 
 import (
-	"insadem/multi_roblox_macos/internal/bypass_sync"
+	"insadem/multi_roblox_macos/internal/close_all_app_instances"
 	"insadem/multi_roblox_macos/internal/discord_link_parser"
 	"insadem/multi_roblox_macos/internal/discord_redirect"
 	"insadem/multi_roblox_macos/internal/open_app"
@@ -11,6 +11,10 @@ import (
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/widget"
 )
+
+//go:generate fyne bundle -o bundled.go ./resources/discord.png
+//go:generate fyne bundle -o bundled.go -append ./resources/more.png
+//go:generate fyne bundle -o bundled.go -append ./resources/mop.png
 
 func main() {
 	mainApp := app.New()
@@ -22,15 +26,18 @@ func main() {
 		discord_redirect.RedirectToServer(discord_link_parser.DiscordLink())
 	})
 
-	var activateButton *widget.Button
-	activateButton = widget.NewButtonWithIcon("Add roblox instance", resourceMorePng, func() { // Set to active / not active
-		bypass_sync.BypassSync() // Isn't necessary, OpenApp bellow does all job, but still let's keep it as safeguard.
-		open_app.OpenApp("/Applications/Roblox.app")
+	activateButton := widget.NewButtonWithIcon("New roblox instance", resourceMorePng, func() {
+		open_app.Open("/Applications/Roblox.app")
+	})
+
+	closeInstancesButton := widget.NewButtonWithIcon("Close all instances", resourceMopPng, func() {
+		close_all_app_instances.Close("RobloxPlayer")
 	})
 
 	window.SetContent(container.NewVBox(
 		discordButton,
 		activateButton,
+		closeInstancesButton,
 	))
 
 	window.ShowAndRun()

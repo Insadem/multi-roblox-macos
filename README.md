@@ -1,8 +1,16 @@
 # multi_roblox_macos
 
 #### Info
-Alright, first commit! Here it goes.
-So.. This project simply allows you to "destroy" Roblox semaphore on Darwin system.
-Simplier explanation is "yeah, you can open multiple roblox instance on MacOs now".
+Roblox Multi Instance now on MacOs!
+This is part of my [project](https://github.com/users/Insadem/projects/2) that strides bring Roblox customization to Mac.
+You can grab latest release [here](), no need to build yourself unless you have intel/arm mac.
 
-I'll probably edit readme later, rn feel exhausted as if I did coke all night (I didn't).
+#### Hardware Support
+m1/m2 (any silicone ones) - 100% compatibility.
+intel/amd - should work too, though can't compile myself 'cus I haven't intel/amd mac.
+
+#### How To Build Yourself
+Set up [fyne](https://docs.fyne.io/started/) first. 
+Then run this in terminal:
+`go install fyne.io/fyne/v2/cmd/fyne@latest`
+`fyne get github.com/fyne-io/solitaire`
