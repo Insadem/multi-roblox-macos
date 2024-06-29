@@ -2,7 +2,10 @@ module insadem/multi_roblox_macos
 
 go 1.22.4
 
-require fyne.io/fyne/v2 v2.4.5
+require (
+	fyne.io/fyne/v2 v2.4.5
+	howett.net/plist v1.0.1
+)
 
 require (
 	fyne.io/systray v1.11.0 // indirect

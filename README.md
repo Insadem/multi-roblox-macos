@@ -1,7 +1,7 @@
 # multi_roblox_macos
 
 #### Info
-Roblox Multi Instance now on MacOs! \
+Roblox Multi Instance is now on MacOs! \
 This is part of my [project](https://github.com/users/Insadem/projects/2) that strides bring Roblox customization to Mac. \
 You can grab latest release [here](), no need to build yourself unless you have intel/amd mac.
 

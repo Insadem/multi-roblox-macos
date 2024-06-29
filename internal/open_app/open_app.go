@@ -4,12 +4,17 @@ import (
 	"os/exec"
 )
 
-func Open(path string) error {
+func Open(path string) <-chan struct{} {
 	var cmd string = "open"
 	var args []string = []string{"-n", path}
 
 	// open -n /Applications/Roblox.app/Contents/MacOS/RobloxPlayer
 
-	cmdInstance := exec.Command(cmd, args...)
-	return cmdInstance.Start()
+	waitChan := make(chan struct{})
+	go func() {
+		defer close(waitChan)
+		exec.Command(cmd, args...).Run()
+	}()
+
+	return waitChan
 }
