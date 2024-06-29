@@ -7,8 +7,7 @@ import (
 	"howett.net/plist"
 )
 
-func SetMultipleInstancesProhibition(prohibited bool) error {
-	filePath := "/Applications/Roblox.app/Contents/Info.plist"
+func SetMultipleInstancesProhibition(filePath string, prohibited bool) error {
 	openedFile, err := os.Open(filePath)
 	if err != nil {
 		return err

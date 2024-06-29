@@ -1,6 +1,7 @@
 package main
 
 import (
+	"insadem/multi_roblox_macos/internal/backup_roblox_app"
 	"insadem/multi_roblox_macos/internal/bypass_sync"
 	"insadem/multi_roblox_macos/internal/close_all_app_instances"
 	"insadem/multi_roblox_macos/internal/discord_link_parser"
@@ -12,6 +13,7 @@ import (
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/widget"
+	"github.com/ncruces/zenity"
 )
 
 //go:generate fyne bundle -o bundled.go ./resources/discord.png
@@ -19,8 +21,16 @@ import (
 //go:generate fyne bundle -o bundled.go -append ./resources/mop.png
 
 func main() {
-	info_plist_modifier.SetMultipleInstancesProhibition(false)
-	defer info_plist_modifier.SetMultipleInstancesProhibition(true)
+	backupResult := <-backup_roblox_app.NewBackup()
+	defer backup_roblox_app.ClearBackup()
+
+	if backupResult.Err != nil {
+		zenity.Error("Couldn't create roblox app backup. Does roblox app exist?")
+		return
+	}
+
+	info_plist_modifier.SetMultipleInstancesProhibition(backupResult.Path+"/Contents/Info.plist", false)
+	defer info_plist_modifier.SetMultipleInstancesProhibition(backupResult.Path+"/Contents/Info.plist", true)
 
 	mainApp := app.New()
 	window := mainApp.NewWindow("Multi Roblox Macos")
@@ -33,7 +43,7 @@ func main() {
 
 	activateButton := widget.NewButtonWithIcon("New roblox instance", resourceMorePng, func() {
 		bypass_sync.Bypass()
-		<-open_app.Open("/Applications/Roblox.app")
+		<-open_app.Open(backupResult.Path)
 		bypass_sync.Bypass()
 	})
 

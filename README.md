@@ -3,7 +3,7 @@
 #### Info
 Roblox Multi Instance is now on MacOs! \
 This is part of my [project](https://github.com/users/Insadem/projects/2) that strides bring Roblox customization to Mac. \
-You can grab latest release [here](), no need to build yourself unless you have intel/amd mac.
+Tutorial about how to run is here []()
 
 #### Hardware Support
 m1/m2 (any silicone ones) - 100% compatibility. \
