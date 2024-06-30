@@ -39,7 +39,7 @@ func NewBackup() <-chan BackupResult {
 			return
 		}
 
-		cpCmd := exec.Command("cp", "-rf", srcFolder, destFolder)
+		cpCmd := exec.Command("cp", "-a", srcFolder, destFolder)
 		err = cpCmd.Run()
 		resultChan <- BackupResult{Path: destFolder + "/Roblox.app", Err: err}
 	}()

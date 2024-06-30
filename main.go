@@ -21,6 +21,7 @@ import (
 //go:generate fyne bundle -o bundled.go -append ./resources/mop.png
 
 func main() {
+	backup_roblox_app.ClearBackup()
 	backupResult := <-backup_roblox_app.NewBackup()
 	defer backup_roblox_app.ClearBackup()
 
@@ -29,8 +30,26 @@ func main() {
 		return
 	}
 
-	info_plist_modifier.SetMultipleInstancesProhibition(backupResult.Path+"/Contents/Info.plist", false)
-	defer info_plist_modifier.SetMultipleInstancesProhibition(backupResult.Path+"/Contents/Info.plist", true)
+	// it does also bypass Mac signature check.
+	initiateMIPBypass := func() error {
+		err := <-open_app.Open(backupResult.Path)
+		if err != nil {
+			return err
+		}
+		err = info_plist_modifier.SetMultipleInstancesProhibition(backupResult.Path+"/Contents/Info.plist", false)
+		if err != nil {
+			return err
+		}
+
+		close_all_app_instances.Close("RobloxPlayer")
+
+		return nil
+	}
+	err := initiateMIPBypass()
+	if err != nil {
+		zenity.Error("Couldn't iniate MIP bypass. Try relaunch app.")
+		return
+	}
 
 	mainApp := app.New()
 	window := mainApp.NewWindow("Multi Roblox Macos")

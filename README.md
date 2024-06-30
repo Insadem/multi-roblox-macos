@@ -3,15 +3,15 @@
 #### Info
 Roblox Multi Instance is now on MacOs! \
 This is part of my [project](https://github.com/users/Insadem/projects/2) that strides bring Roblox customization to Mac. \
-Tutorial about how to run is here []()
+Video tutorial is [here](https://www.youtube.com/watch?v=2M1Gk0WrM2w).
 
 #### Hardware Support
 m1/m2 (any silicone ones) - 100% compatibility. \
-intel/amd - should work too, though can't compile myself 'cus I haven't intel/amd mac.
+intel/amd - should work too, though didn't test.
 
 #### How To Build Yourself
-Set up [fyne](https://docs.fyne.io/started/) first. \ 
-Then run this in terminal: \
+Set up [fyne](https://docs.fyne.io/started/) first. 
+Then run in the terminal: \
 `go install fyne.io/fyne/v2/cmd/fyne@latest` \
 `fyne get https://github.com/Insadem/multi_roblox_macos`
 
