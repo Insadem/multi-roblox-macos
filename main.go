@@ -20,36 +20,25 @@ import (
 //go:generate fyne bundle -o bundled.go -append ./resources/more.png
 //go:generate fyne bundle -o bundled.go -append ./resources/mop.png
 
+// it does also bypass Mac signature check.
+func initiateMIPBypass(path string) error {
+	err := <-open_app.Open(path)
+	if err != nil {
+		return err
+	}
+	err = info_plist_modifier.SetMultipleInstancesProhibition(path+"/Contents/Info.plist", false)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func main() {
 	backup_roblox_app.ClearBackup()
-	backupResult := <-backup_roblox_app.NewBackup()
 	defer backup_roblox_app.ClearBackup()
 
-	if backupResult.Err != nil {
-		zenity.Error("Couldn't create roblox app backup. Does roblox app exist?")
-		return
-	}
-
-	// it does also bypass Mac signature check.
-	initiateMIPBypass := func() error {
-		err := <-open_app.Open(backupResult.Path)
-		if err != nil {
-			return err
-		}
-		err = info_plist_modifier.SetMultipleInstancesProhibition(backupResult.Path+"/Contents/Info.plist", false)
-		if err != nil {
-			return err
-		}
-
-		close_all_app_instances.Close("RobloxPlayer")
-
-		return nil
-	}
-	err := initiateMIPBypass()
-	if err != nil {
-		zenity.Error("Couldn't iniate MIP bypass. Try relaunch app.")
-		return
-	}
+	close_all_app_instances.Close("RobloxPlayer")
 
 	mainApp := app.New()
 	window := mainApp.NewWindow("Multi Roblox Macos")
@@ -60,10 +49,42 @@ func main() {
 		discord_redirect.RedirectToServer(discord_link_parser.DiscordLink())
 	})
 
-	activateButton := widget.NewButtonWithIcon("New roblox instance", resourceMorePng, func() {
-		bypass_sync.Bypass()
-		<-open_app.Open(backupResult.Path)
-		bypass_sync.Bypass()
+	// add progress bar that prevents user from clicking another button
+
+	var newInstanceButton *widget.Button
+	newInstanceButton = widget.NewButtonWithIcon("New roblox instance", resourceMorePng, func() {
+		if newInstanceButton.Disabled() {
+			return
+		}
+		newInstanceButton.Disable()
+
+		go func() {
+			defer newInstanceButton.Enable()
+
+			progressDlg, err := zenity.Progress(
+				zenity.Title("Creating new roblox instance."),
+				zenity.Pulsate())
+			if err != nil {
+				return
+			}
+			defer progressDlg.Close()
+
+			backupResult := <-backup_roblox_app.NewBackup()
+			if backupResult.Err != nil {
+				zenity.Error("Couldn't create roblox app backup. Does roblox app exist?")
+				return
+			}
+
+			err = initiateMIPBypass(backupResult.Path)
+			if err != nil {
+				zenity.Error("Couldn't iniate MIP bypass. Try click again.")
+				return
+			}
+
+			bypass_sync.Bypass()
+			<-open_app.Open(backupResult.Path)
+			bypass_sync.Bypass()
+		}() // new goroutine to prevent main UI thread block
 	})
 
 	closeInstancesButton := widget.NewButtonWithIcon("Close all instances", resourceMopPng, func() {
@@ -72,7 +93,7 @@ func main() {
 
 	window.SetContent(container.NewVBox(
 		discordButton,
-		activateButton,
+		newInstanceButton,
 		closeInstancesButton,
 	))
 

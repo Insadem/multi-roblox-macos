@@ -6,13 +6,28 @@ import (
 	"os/exec"
 )
 
-func getDestinationFolder() (string, error) {
+func getBackupDir() (string, error) {
 	homeDir, err := os.UserHomeDir()
 	if err != nil {
 		return "", err
 	}
 
 	return homeDir + "/roblox_backup", nil
+}
+
+func getDestinationDir() (string, error) {
+	backupDir, err := getBackupDir()
+	if err != nil {
+		return "", err
+	}
+
+	err = os.Mkdir(backupDir, 0777)
+	if err != nil && !errors.Is(err, os.ErrExist) {
+		return "", err
+	}
+
+	path, err := os.MkdirTemp(backupDir, "")
+	return path, err
 }
 
 type BackupResult struct {
@@ -26,32 +41,27 @@ func NewBackup() <-chan BackupResult {
 	go func() {
 		defer close(resultChan)
 
-		srcFolder := "/Applications/Roblox.app"
-		destFolder, err := getDestinationFolder()
+		srcPath := "/Applications/Roblox.app"
+		destDir, err := getDestinationDir()
 		if err != nil {
 			resultChan <- BackupResult{Err: err}
 			return
 		}
 
-		err = os.Mkdir(destFolder, 0777)
-		if err != nil && !errors.Is(err, os.ErrExist) {
-			resultChan <- BackupResult{Err: err}
-			return
-		}
-
-		cpCmd := exec.Command("cp", "-a", srcFolder, destFolder)
+		cpCmd := exec.Command("cp", "-a", srcPath, destDir)
 		err = cpCmd.Run()
-		resultChan <- BackupResult{Path: destFolder + "/Roblox.app", Err: err}
+		resultChan <- BackupResult{Path: destDir + "/Roblox.app", Err: err}
 	}()
 
 	return resultChan
 }
 
 func ClearBackup() error {
-	destFolder, err := getDestinationFolder()
+	backupDir, err := getBackupDir()
 	if err != nil {
 		return err
 	}
 
-	return os.RemoveAll(destFolder)
+	// TODO: sometimes might error, so retry mechanism at least for 1-2 times is quite good solution?
+	return os.RemoveAll(backupDir)
 }
