@@ -17,3 +17,6 @@ Then run in the terminal: \
 
 If you build from source (this repo): \
 `fyne package -os darwin -icon ./resources/app_icon.png`
+
+To build for amd/intel mac from silicone one (unix file, pack to app yourself): \
+`GOOS=darwin GOARCH=amd64 CGO_ENABLED=1 go build`
