@@ -1,9 +1,10 @@
-module insadem/multi_roblox_macos
+module github.com/Insadem/multi-roblox-macos
 
 go 1.22.4
 
 require (
 	fyne.io/fyne/v2 v2.4.5
+	github.com/ncruces/zenity v0.10.12
 	howett.net/plist v1.0.1
 )
 
@@ -25,7 +26,6 @@ require (
 	github.com/gopherjs/gopherjs v1.17.2 // indirect
 	github.com/josephspurrier/goversioninfo v1.4.0 // indirect
 	github.com/jsummers/gobmp v0.0.0-20230614200233-a9de23ed2e25 // indirect
-	github.com/ncruces/zenity v0.10.12 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/randall77/makefat v0.0.0-20210315173500-7ddd0e42c844 // indirect
 	github.com/srwiley/oksvg v0.0.0-20221011165216-be6e8873101c // indirect

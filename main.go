@@ -1,19 +1,18 @@
 package main
 
 import (
-	"insadem/multi_roblox_macos/internal/backup_roblox_app"
-	"insadem/multi_roblox_macos/internal/close_all_app_instances"
-	"insadem/multi_roblox_macos/internal/discord_link_parser"
-	"insadem/multi_roblox_macos/internal/discord_redirect"
-	new_instance_widget "insadem/multi_roblox_macos/ui"
-
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/widget"
+	"github.com/Insadem/multi-roblox-macos/internal/backup_roblox_app"
+	"github.com/Insadem/multi-roblox-macos/internal/close_all_app_instances"
+	"github.com/Insadem/multi-roblox-macos/internal/discord_link_parser"
+	"github.com/Insadem/multi-roblox-macos/internal/discord_redirect"
+	new_instance_widget "github.com/Insadem/multi-roblox-macos/ui"
 )
 
-//go:generate fyne bundle -o bundled.go ./resources/discord.png
+//go:gen erate fyne bundle -o bundled.go ./resources/discord.png
 //go:generate fyne bundle -o bundled.go -append ./resources/more.png
 //go:generate fyne bundle -o bundled.go -append ./resources/mop.png
 

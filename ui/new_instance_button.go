@@ -1,13 +1,12 @@
 package new_instance_widget
 
 import (
-	"insadem/multi_roblox_macos/internal/backup_roblox_app"
-	"insadem/multi_roblox_macos/internal/bypass_sync"
-	"insadem/multi_roblox_macos/internal/info_plist_modifier"
-	"insadem/multi_roblox_macos/internal/open_app"
-
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/widget"
+	"github.com/Insadem/multi-roblox-macos/internal/backup_roblox_app"
+	"github.com/Insadem/multi-roblox-macos/internal/bypass_sync"
+	"github.com/Insadem/multi-roblox-macos/internal/info_plist_modifier"
+	"github.com/Insadem/multi-roblox-macos/internal/open_app"
 	"github.com/ncruces/zenity"
 )
 

@@ -1,4 +1,4 @@
-# multi_roblox_macos
+# multi-roblox-macos
 
 #### Info
 Roblox Multi Instance is now on MacOs! \

@@ -1,8 +1,9 @@
 package close_all_app_instances
 
 import (
-	"insadem/multi_roblox_macos/internal/ps_darwin"
 	"os"
+
+	"github.com/Insadem/multi-roblox-macos/internal/ps_darwin"
 )
 
 func Close(name string) {
