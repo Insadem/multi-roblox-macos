@@ -1,0 +1,8 @@
+/Users/mark/dev/projects/golang/appleblox-ext/darwinclib/out/build/default/CMakeFiles/edit_cache.dir
+/Users/mark/dev/projects/golang/appleblox-ext/darwinclib/out/build/default/CMakeFiles/rebuild_cache.dir
+/Users/mark/dev/projects/golang/appleblox-ext/darwinclib/out/build/default/syncbreaker_darwin/CMakeFiles/syncbreaker_darwin.dir
+/Users/mark/dev/projects/golang/appleblox-ext/darwinclib/out/build/default/syncbreaker_darwin/CMakeFiles/edit_cache.dir
+/Users/mark/dev/projects/golang/appleblox-ext/darwinclib/out/build/default/syncbreaker_darwin/CMakeFiles/rebuild_cache.dir
+/Users/mark/dev/projects/golang/appleblox-ext/darwinclib/out/build/default/urlhandler_darwin/CMakeFiles/urlhandler_darwin.dir
+/Users/mark/dev/projects/golang/appleblox-ext/darwinclib/out/build/default/urlhandler_darwin/CMakeFiles/edit_cache.dir
+/Users/mark/dev/projects/golang/appleblox-ext/darwinclib/out/build/default/urlhandler_darwin/CMakeFiles/rebuild_cache.dir

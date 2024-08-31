@@ -1,0 +1,123 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						2
+					],
+					"jsonFile" : "directory-.-Release-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5.0"
+					},
+					"projectIndex" : 0,
+					"source" : "."
+				},
+				{
+					"build" : "syncbreaker_darwin",
+					"jsonFile" : "directory-syncbreaker_darwin-Release-89b2c43a57a557fedf67.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5.0"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 1,
+					"source" : "syncbreaker_darwin",
+					"targetIndexes" : 
+					[
+						0
+					]
+				},
+				{
+					"build" : "urlhandler_darwin",
+					"jsonFile" : "directory-urlhandler_darwin-Release-bf123d7821381687e6b9.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5.0"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 2,
+					"source" : "urlhandler_darwin",
+					"targetIndexes" : 
+					[
+						1
+					]
+				}
+			],
+			"name" : "Release",
+			"projects" : 
+			[
+				{
+					"childIndexes" : 
+					[
+						1,
+						2
+					],
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "global"
+				},
+				{
+					"directoryIndexes" : 
+					[
+						1
+					],
+					"name" : "syncbreaker_darwin",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						0
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						2
+					],
+					"name" : "urlhandler_darwin",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						1
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 1,
+					"id" : "syncbreaker_darwin::@984fc00ce26c46eb8c96",
+					"jsonFile" : "target-syncbreaker_darwin-Release-fe18e90ddf7b9345469e.json",
+					"name" : "syncbreaker_darwin",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "urlhandler_darwin::@97ad8888d6c4df172bd0",
+					"jsonFile" : "target-urlhandler_darwin-Release-6b89ec26118ac9fac04b.json",
+					"name" : "urlhandler_darwin",
+					"projectIndex" : 2
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/Users/mark/dev/projects/golang/appleblox-ext/darwinclib/out/build/default",
+		"source" : "/Users/mark/dev/projects/golang/appleblox-ext/darwinclib"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}

@@ -1,0 +1,105 @@
+{
+	"artifacts" : 
+	[
+		{
+			"path" : "/Users/mark/dev/projects/golang/appleblox-ext/lib/urlhandler_darwin.dylib"
+		}
+	],
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_library",
+			"target_link_libraries"
+		],
+		"files" : 
+		[
+			"urlhandler_darwin/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 13,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 17,
+				"parent" : 0
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "-O3 -DNDEBUG -arch x86_64 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -mmacosx-version-min=11.0 -fPIC"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"define" : "urlhandler_darwin_EXPORTS"
+				}
+			],
+			"language" : "C",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		}
+	],
+	"id" : "urlhandler_darwin::@97ad8888d6c4df172bd0",
+	"link" : 
+	{
+		"commandFragments" : 
+		[
+			{
+				"fragment" : "",
+				"role" : "flags"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "-framework CoreServices",
+				"role" : "libraries"
+			}
+		],
+		"language" : "C"
+	},
+	"name" : "urlhandler_darwin",
+	"nameOnDisk" : "urlhandler_darwin.dylib",
+	"paths" : 
+	{
+		"build" : "urlhandler_darwin",
+		"source" : "urlhandler_darwin"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "urlhandler_darwin/urlhandler_darwin.c",
+			"sourceGroupIndex" : 0
+		}
+	],
+	"type" : "SHARED_LIBRARY"
+}
