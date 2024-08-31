@@ -1,22 +1,22 @@
 # multi-roblox-macos
 
-#### Info
-Roblox Multi Instance is now on MacOs! \
-This is part of my [project](https://github.com/users/Insadem/projects/2) that strides bring Roblox customization to Mac. \
-Video tutorial is [here](https://www.youtube.com/watch?v=2M1Gk0WrM2w).
+## info
+multi instance is now on macOS! \
+it does work out of the box & supports teleport.
 
-#### Hardware Support
-m1/m2 (any silicone ones) - 100% compatibility. \
-intel/amd - should work too, though didn't test.
+### setup steps:
+1. download this app from releases (v2)
+2. open terminal and enter without quotes: "xattr -c path_to_the_downloaded_app"
+3. enter user's password if requested
 
-#### How To Build Yourself
-Set up [fyne](https://docs.fyne.io/started/) first. 
-Then run in the terminal: \
-`go install fyne.io/fyne/v2/cmd/fyne@latest` \
-`fyne get https://github.com/Insadem/multi_roblox_macos`
+### steps to make it work:
+1. launch this app
+2. click play button on roblox's website
+3. repeat for different web accounts
 
-If you build from source (this repo): \
-`fyne package -os darwin -icon ./resources/app_icon.png`
 
-To build for amd/intel mac from silicone one (unix file, pack to app yourself): \
-`GOOS=darwin GOARCH=amd64 CGO_ENABLED=1 go build`
+**P.S:** you can download manual version (v1) from releases, *however* it's recommended for your convenience to use v2
+
+## hardware support
+m1/m2 (any silicone ones) - 100% compatibility \
+intel/amd - should work too, though didn't test
