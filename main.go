@@ -12,7 +12,7 @@ import (
 	new_instance_widget "github.com/Insadem/multi-roblox-macos/ui"
 )
 
-//go:gen erate fyne bundle -o bundled.go ./resources/discord.png
+//go:generate fyne bundle -o bundled.go ./resources/discord.png
 //go:generate fyne bundle -o bundled.go -append ./resources/more.png
 //go:generate fyne bundle -o bundled.go -append ./resources/mop.png
 
