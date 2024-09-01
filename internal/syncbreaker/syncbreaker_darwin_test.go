@@ -8,11 +8,6 @@ import (
 )
 
 func TestBreak(t *testing.T) {
-	b, err := New()
-	if err != nil {
-		t.Error(err)
-	}
-
 	close, err := robloxapp.Open()
 	if err != nil {
 		t.Error(err)
@@ -20,13 +15,13 @@ func TestBreak(t *testing.T) {
 	defer close()
 	time.Sleep(time.Millisecond * 666)
 
-	err = b.Break()
-	if err != nil {
-		t.Error(err)
+	ok := Break()
+	if !ok {
+		t.Error("can't destroy semaphore")
 	}
 
-	err = b.Break()
-	if err == nil {
+	ok = Break()
+	if ok {
 		t.Error("expected to be not able destroy semaphore")
 	}
 }

@@ -1,9 +1,0 @@
-# ninja log v6
-24	606	1723557073489028992	syncbreaker_darwin/CMakeFiles/syncbreaker_darwin.dir/syncbreaker_darwin.c.o	1ea28550f82c2d43
-25	525	1723557227007995037	urlhandler_darwin/CMakeFiles/urlhandler_darwin.dir/urlhandler_darwin.c.o	e4a948eb2fe28b71
-26	85	1723557227008457147	/Users/mark/dev/projects/golang/appleblox-ext/lib/syncbreaker_darwin.dylib	ce208e11b9cab43c
-525	575	1723557227507991690	/Users/mark/dev/projects/golang/appleblox-ext/lib/urlhandler_darwin.dylib	baf3582c540b04fb
-50	2165	1725122350547961742	syncbreaker_darwin/CMakeFiles/syncbreaker_darwin.dir/syncbreaker_darwin.c.o	e55587c9e48b8d5d
-50	2520	1725122350548274980	urlhandler_darwin/CMakeFiles/urlhandler_darwin.dir/urlhandler_darwin.c.o	de9a7c22efdc9066
-2520	4053	1725122353017791481	/Users/mark/dev/projects/golang/appleblox-ext/lib/urlhandler_darwin.dylib	6f2c52165563b96c
-2165	4053	1725122352663155765	/Users/mark/dev/projects/golang/appleblox-ext/lib/syncbreaker_darwin.dylib	3cca1ec42588f096

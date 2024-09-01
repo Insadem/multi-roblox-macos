@@ -1,64 +1,70 @@
 package urlhandler
 
-import (
-	"sync"
+/*
+#cgo CFLAGS: -x objective-c
+#cgo LDFLAGS: -framework CoreServices
+#include <CoreServices/CoreServices.h>
+#include <stdlib.h>
 
-	"github.com/Insadem/multi-roblox-macos/pkg/fspath"
-	"github.com/ebitengine/purego"
+int setHandler(const char *bundleIdentifier, const char *urlScheme) {
+    CFStringRef cfUrlScheme = CFStringCreateWithCString(NULL, urlScheme, kCFStringEncodingUTF8);
+    CFStringRef cfBundleIdentifier = CFStringCreateWithCString(NULL, bundleIdentifier, kCFStringEncodingUTF8);
+
+    OSStatus status = LSSetDefaultHandlerForURLScheme(cfUrlScheme, cfBundleIdentifier);
+
+    CFRelease(cfUrlScheme);
+    CFRelease(cfBundleIdentifier);
+
+    return (status == noErr) ? 0 : 1;
+}
+
+int checkHandler(const char *bundleIdentifier, const char *urlScheme) {
+    CFStringRef cfUrlScheme = CFStringCreateWithCString(NULL, urlScheme, kCFStringEncodingUTF8);
+    CFStringRef cfBundleIdentifier = CFStringCreateWithCString(NULL, bundleIdentifier, kCFStringEncodingUTF8);
+
+    CFStringRef currentHandler = LSCopyDefaultHandlerForURLScheme(cfUrlScheme);
+    if (!currentHandler) {
+        CFRelease(cfUrlScheme);
+        CFRelease(cfBundleIdentifier);
+        return 1;
+    }
+
+    Boolean isDefault = CFStringCompare(currentHandler, cfBundleIdentifier, 0) == kCFCompareEqualTo;
+
+    CFRelease(currentHandler);
+    CFRelease(cfUrlScheme);
+    CFRelease(cfBundleIdentifier);
+
+    return isDefault ? 0 : 1;
+}
+*/
+import "C"
+import (
+	"unsafe"
 )
 
 const (
 	ROBLOX_BUNDLE_IDENTIFIER = "com.roblox.RobloxPlayer"
 )
 
-type urlHandlerFn func(bundleIdentifier, urlScheme string) int
+func Set(bundleIdentifier, urlScheme string) bool {
+	cBundleIdentifier := C.CString(bundleIdentifier)
+	defer C.free(unsafe.Pointer(cBundleIdentifier))
 
-type UrlHandler struct {
-	set   urlHandlerFn
-	check urlHandlerFn
-	mut   *sync.Mutex
+	cURLScheme := C.CString(urlScheme)
+	defer C.free(unsafe.Pointer(cURLScheme))
+
+	result := C.setHandler(cBundleIdentifier, cURLScheme)
+	return result == 0
 }
 
-func New() (UrlHandler, error) {
-	dir, err := fspath.LibDir.Get()
-	if err != nil {
-		return UrlHandler{}, err
-	}
+func Check(bundleIdentifier, urlScheme string) bool {
+	cBundleIdentifier := C.CString(bundleIdentifier)
+	defer C.free(unsafe.Pointer(cBundleIdentifier))
 
-	lib, err := purego.Dlopen(dir+"/urlhandler_darwin.dylib", purego.RTLD_NOW|purego.RTLD_GLOBAL)
-	if err != nil {
-		return UrlHandler{}, err
-	}
+	cURLScheme := C.CString(urlScheme)
+	defer C.free(unsafe.Pointer(cURLScheme))
 
-	var set, check urlHandlerFn
-	purego.RegisterLibFunc(&set, lib, "set")
-	purego.RegisterLibFunc(&check, lib, "check")
-
-	return UrlHandler{
-		set:   set,
-		check: check,
-		mut:   &sync.Mutex{},
-	}, nil
-}
-
-func (u UrlHandler) Set(bundleIdentifier, urlScheme string) bool {
-	u.mut.Lock()
-	defer u.mut.Unlock()
-
-	if u.set(bundleIdentifier, urlScheme) == 0 {
-		return true
-	} else {
-		return false
-	}
-}
-
-func (u UrlHandler) Check(bundleIdentifier, urlScheme string) bool {
-	u.mut.Lock()
-	defer u.mut.Unlock()
-
-	if u.check(bundleIdentifier, urlScheme) == 0 {
-		return true
-	} else {
-		return false
-	}
+	result := C.checkHandler(cBundleIdentifier, cURLScheme)
+	return result == 0
 }
