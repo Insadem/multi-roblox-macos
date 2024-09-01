@@ -22,5 +22,6 @@ m1/m2 (any silicone ones) - 100% compatibility \
 intel/amd - should work too, though didn't test
 
 ## compile yourself (optional)
-1. go build in the root of the repo
-2. place generated binary into multiroblox.app/MacOS
+- to build for your arch: `go build`
+- to build for amd arch: `GOOS=darwin GOARCH=amd64 CGO_ENABLED=1 go build`
+- place generated binary into multiroblox.app/MacOS folder
