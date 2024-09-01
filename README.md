@@ -20,3 +20,7 @@ it does work out of the box & supports teleport.
 ## hardware support
 m1/m2 (any silicone ones) - 100% compatibility \
 intel/amd - should work too, though didn't test
+
+## compile yourself (optional)
+1. go build in the root of the repo
+2. place generated binary into multiroblox.app/MacOS
